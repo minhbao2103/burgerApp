@@ -27,11 +27,32 @@ class BurgerStore extends Component {
           unitPrice:15
         },
       }
-
+      
       onHandleToppingChange= (key,value)=> {
          const menu = this.state;
          menu[key]['amount']+= value
          this.setState({...menu,})
+      }
+      onReset = () => {
+        const menu = this.state;
+        const stateList = Object.values(this.state)
+       stateList.map(menuItem => {
+         menuItem.amount = 0
+         menu[menuItem.key] = menuItem
+       })
+       this.setState({...menu,},)
+
+      };
+       
+      onOrder = () => {
+        alert('Đã thanh toán thành công!')
+        const menu = this.state;
+        const stateList = Object.values(this.state)
+       stateList.map(menuItem => {
+         menuItem.amount =0
+         menu[menuItem.key] = menuItem
+       })
+       this.setState({...menu,})
       }
   render() {
     return (
@@ -49,6 +70,8 @@ class BurgerStore extends Component {
               {/* truyền dữ liệu state list ở trên xuống burgermenu để render ra (menu là tên tự đặt) */}
               <BurgerMenu menu={this.state} 
                 onToppingChange = {this.onHandleToppingChange}
+                onReset = {this.onReset}
+                onOrder = {this.onOrder}
               />
           </div>
                   </div>

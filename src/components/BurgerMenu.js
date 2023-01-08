@@ -3,9 +3,8 @@ import LayoutContainer from './LayoutContainer';
 
 class BurgerMenu extends Component {
     render() {
-      const {menu, onToppingChange} = this.props;
+      const {menu, onToppingChange,onReset,onOrder} = this.props;
       const values = Object.values(menu);
-      
       const tbodyContent = values.map((item, index) => {
         const {key, unitPrice, amount} = item;
         const label = key.slice(0,1).toUpperCase() + key.slice(1,key.length)
@@ -23,7 +22,7 @@ class BurgerMenu extends Component {
           onClick= {()=> onToppingChange(key,-1)}>Less</button>
           <span>{amount}</span>
           <button className='btn btn-primary' 
-          onClick={()=> onToppingChange(key, +1)}>More</button>
+          onClick={()=> onToppingChange(key,+1)}>More</button>
       </td>
       <td>{unitPrice}</td>
       <td>{totalToppingPrice}</td>
@@ -67,8 +66,8 @@ class BurgerMenu extends Component {
   </tbody>
 </table>
         <div>
-        <button className='btn btn-primary me-2'>Order now</button>
-        <button className='btn btn-primary'>Reset</button>
+        <button className='btn btn-primary me-2' onClick={() => onOrder()}>Order now</button>
+        <button className='btn btn-primary' onClick={() => onReset()} >Reset</button>
         </div>
     </div>
       </LayoutContainer>
